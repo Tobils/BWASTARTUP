@@ -76,3 +76,34 @@ kita bisa menggunaka erdplus.com
     - code : varchar
     - created_at : datetime
     - updated_at : datetime
+
+## Init Project
+1. Config
+    ```bash
+    mkdir database
+    mkdir bwastartup
+    cd bwastartup
+    go mod init bwastartup
+    ```
+
+2. Install Gin dan Gorm
+    ```bash
+    # install GIN
+    go get -u github.com/gin-gonic/gin
+
+    # install GORM
+    go get -u gorm.io/gorm
+
+    # driver gorm mysql
+    go get -u gorm.io/driver/mysql
+    ```
+
+2. Run Mysql Docker
+    ```bash
+    cd database
+    docker-compose up -d
+    ```
+
+
+## Reference
+- [gorm-connect-mysql](https://gorm.io/docs/connecting_to_the_database.html)
