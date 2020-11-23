@@ -98,11 +98,16 @@ kita bisa menggunaka erdplus.com
     go get -u gorm.io/driver/mysql
     ```
 
-2. Run Mysql Docker
+3. Run Mysql Docker
     ```bash
     cd database
     docker-compose up -d
     ```
+
+4. Struktur Direktory
+    - handler
+    - service
+    - repository -> db
 
 
 ## Reference
