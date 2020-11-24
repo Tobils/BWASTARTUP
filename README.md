@@ -77,6 +77,23 @@ kita bisa menggunaka erdplus.com
     - created_at : datetime
     - updated_at : datetime
 
+## Table init
+1. Table User
+    ```sql
+    CREATE TABLE users (  
+    id int(6) NOT NULL primary key AUTO_INCREMENT,
+    name VARCHAR(50),
+    occupation VARCHAR(50),
+    email VARCHAR(50),
+    password_hash VARCHAR(255),
+    avatar_file_name VARCHAR(50),
+    role VARCHAR(50),
+    token VARCHAR(50),
+    created_at DATETIME,
+    updated_at DATETIME
+    )
+    ```
+
 ## Init Project
 1. Config
     ```bash
@@ -84,6 +101,8 @@ kita bisa menggunaka erdplus.com
     mkdir bwastartup
     cd bwastartup
     go mod init bwastartup
+
+    # auto reload
     ```
 
 2. Install Gin dan Gorm
@@ -109,6 +128,11 @@ kita bisa menggunaka erdplus.com
     - service
     - repository -> db
 
+5. Register
+    - input
+    - handler -> mapping input ke struct
+    - service -> mapping ke struct input ke struct user
+    - repository -> save struct user ke db
 
 ## Reference
 - [gorm-connect-mysql](https://gorm.io/docs/connecting_to_the_database.html)
