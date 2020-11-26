@@ -25,20 +25,35 @@ func main() {
 	router := gin.Default()
 	api := router.Group("/api/v1")
 	api.POST("/users", userHandler.RegisterUser)
+	api.POST("/sessions", userHandler.Login)
 
 	router.Run(":3000")
-
-	// userInput := user.RegisterUserInput{}
-	// userInput.Name = "test simpan dari service"
-	// userInput.Email = "contoh@gmail.com"
-	// userInput.Occupation = "petanikode"
-	// userInput.Password = "passw0rd"
-
-	// userService.RegisterUser(userInput)
-
-	// user := user.User{
-	// 	Name: "Test Simpan",
-	// }
-
-	// userRepository.Save(user)
 }
+
+/**
+single test direct to service, repo
+*/
+
+// var email string = "contoh@gmail.com"
+// loginUserInput := user.LoginUserInput{}
+// loginUserInput.Email = email
+// loginUserInput.Password = ""
+// user, err := userService.LoginUser(loginUserInput)
+// fmt.Println("User Service Find by email ", user)
+
+// user, err := userRepository.FindByEmail(email)
+// fmt.Println(user.Name)
+
+// userInput := user.RegisterUserInput{}
+// userInput.Name = "test simpan dari service"
+// userInput.Email = "contoh@gmail.com"
+// userInput.Occupation = "petanikode"
+// userInput.Password = "passw0rd"
+
+// userService.RegisterUser(userInput)
+
+// user := user.User{
+// 	Name: "Test Simpan",
+// }
+
+// userRepository.Save(user)
