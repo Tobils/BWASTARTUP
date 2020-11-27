@@ -138,13 +138,11 @@ kita bisa menggunaka erdplus.com
    ```
 
 4. Struktur Direktory
-
    - handler
    - service
    - repository -> db
 
 5. Register
-
    - input
    - handler -> mapping input ke struct
    - service -> mapping ke struct input ke struct user

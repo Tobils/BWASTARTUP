@@ -27,6 +27,7 @@ func main() {
 	api.POST("/users", userHandler.RegisterUser)
 	api.POST("/sessions", userHandler.Login)
 	api.POST("/email_checkers", userHandler.CheckEmailAvailability)
+	api.POST("/avatars", userHandler.UploadAvatar)
 
 	router.Run(":3000")
 }
@@ -34,6 +35,10 @@ func main() {
 /**
 single test direct to service, repo
 */
+// userService.SaveAvatar(1, "images/1-profie.png")
+
+// user, err := userRepository.FindUserByID(1)
+// fmt.Println(user.Name)
 
 // var email string = "contoh@gmail.com"
 // loginUserInput := user.LoginUserInput{}
