@@ -144,10 +144,17 @@ kita bisa menggunaka erdplus.com
    - repository -> db
 
 5. Register
+
    - input
    - handler -> mapping input ke struct
    - service -> mapping ke struct input ke struct user
    - repository -> save struct user ke db
+
+6. Login
+   - input
+   - handler -> mapping input ke trsuct input
+   - service -> mapping struct input ke struct user, bcrypt password
+   - repository -> find logged in by email
 
 ## Reference
 
