@@ -138,11 +138,13 @@ kita bisa menggunaka erdplus.com
    ```
 
 4. Struktur Direktory
+
    - handler
    - service
    - repository -> db
 
 5. Register
+
    - input
    - handler -> mapping input ke struct
    - service -> mapping ke struct input ke struct user
@@ -153,6 +155,78 @@ kita bisa menggunaka erdplus.com
    - handler -> mapping input ke trsuct input
    - service -> mapping struct input ke struct user, bcrypt password
    - repository -> find logged in by email
+
+## JWT Auth / Json Web Tokwn Auth
+
+jwt dimanfaatkan untuk authentikasi API berdasarkan token user. [cek details jwt](jwt.io)
+
+```bash
+# get jwt module
+go get github.com/dgrijalva/jwt-go
+```
+
+1. create auth service /bawastartup/auth/service.go
+
+   ```go
+
+   // service.go
+   package auth
+   import "github.com/dgrijalva/jwt-go"
+
+   /**
+   1. generate token
+   2. validasi token
+   */
+
+   type Service interface {
+      GenerateToken(userID int) (string, error)
+   }
+
+   type jwtService struct {
+   }
+
+   func NewService() *jwtService {
+      return &jwtService{}
+   }
+
+   var SECRET_KEY = []byte("BWASTARTUP_s3cr3t_k3y")
+
+   func (s *jwtService) GenerateToken(userID int) (string, error) {
+      claim := jwt.MapClaims{}
+      claim["user_id"] = userID
+
+      // generate token
+      token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
+
+      // tanda tangani token
+      signedToken, err := token.SignedString(SECRET_KEY)
+      if err != nil {
+         return signedToken, err
+      }
+
+      return signedToken, nil
+   }
+
+   ```
+
+2. API response with token
+   ```json
+   {
+     "meta": {
+       "message": "Suuccessfully loggedin",
+       "code": 200,
+       "status": "success"
+     },
+     "data": {
+       "id": 1,
+       "name": "test simpan dari service",
+       "occupation": "petanikode",
+       "email": "contoh@gmail.com",
+       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.pR5mUyz1tm_Ni6-mCi-ankpmIwVifpJ0k_tNjbyp6p8",
+       "ImageUrl": ""
+     }
+   }
+   ```
 
 ## Reference
 
