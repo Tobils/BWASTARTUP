@@ -210,6 +210,7 @@ go get github.com/dgrijalva/jwt-go
    ```
 
 2. API response with token
+
    ```json
    {
      "meta": {
@@ -227,6 +228,14 @@ go get github.com/dgrijalva/jwt-go
      }
    }
    ```
+
+3. Auth Middleware
+   - ambil nilai header Authorization: Bearer token
+   - dari Authorization: Bearer, hanya diambil nilai token saja
+   - validasi token
+   - token => user_id
+   - ambil user dari db berdasarkan user_id melalui service
+   - set context dangan isi user
 
 ## Reference
 

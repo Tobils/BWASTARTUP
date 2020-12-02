@@ -181,8 +181,9 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 		return
 	}
 
-	// harusnya dapat JWT
-	userID := 1
+	// user id daro middlerware JWT
+	currentUser := c.MustGet("currentUser").(user.User)
+	userID := currentUser.ID
 	_, err = h.userService.SaveAvatar(userID, path)
 	if err != nil {
 		data := gin.H{"is_uploaded": false}
