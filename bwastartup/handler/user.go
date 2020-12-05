@@ -161,6 +161,9 @@ func (h *userHandler) CheckEmailAvailability(c *gin.Context) {
 4. JWT (sementara hardcode, seakan2 user yg login ID = 1)
 5. repo ambil data user dengan ID = 1
 6. repo update data user, simpan lokasi file
+
+
+-> blm ada validasi file yg di upload apakah image ataukah bukan
 */
 func (h *userHandler) UploadAvatar(c *gin.Context) {
 
