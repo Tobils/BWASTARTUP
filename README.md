@@ -104,6 +104,36 @@ kita bisa menggunaka erdplus.com
    updated_at DATETIME
    )
    ```
+2. Table Campaigns
+
+   ```sql
+   CREATE TABLE campaigns (
+   id int(11) NOT NULL primary key AUTO_INCREMENT,
+   user_id int(11),
+   name VARCHAR(255),
+   short_description VARCHAR(255),
+   description TEXT,
+   perks TEXT,
+   backer_count INT(11),
+   goal_amount INT(11),
+   current_amount INT(11),
+   slug VARCHAR(255),
+   created_at DATETIME,
+   updated_at DATETIME
+   )
+   ```
+
+3. Table Campaign Images
+   ```sql
+   CREATE TABLE campaign_images (
+   id int(11) NOT NULL primary key AUTO_INCREMENT,
+   campaign_id int(11),
+   file_name VARCHAR(255),
+   is_primary TINYINT(4),
+   created_at DATETIME,
+   updated_at DATETIME
+   )
+   ```
 
 ## Init Project
 
@@ -237,6 +267,10 @@ go get github.com/dgrijalva/jwt-go
    - token => user_id
    - ambil user dari db berdasarkan user_id melalui service
    - set context dangan isi user
+
+## Others
+
+- relasi ambil data `err := r.db.Where("user_id = ?", userID).Preload("CampaignImages", "campaign_images.is_primary = 1").Find(&campaigns).Error`
 
 ## Reference
 
