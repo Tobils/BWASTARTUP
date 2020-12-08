@@ -6,7 +6,6 @@ import (
 	"bwastartup/handler"
 	"bwastartup/helper"
 	"bwastartup/user"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -29,18 +28,8 @@ func main() {
 
 	userRepository := user.NewRepository(db)
 	campaignRepository := campaign.NewRepository(db)
-	campaigns, err := campaignRepository.FindAll()
-	fmt.Println(len(campaigns), err)
-
-	campaigns, err = campaignRepository.FindByUserID(1)
-	for _, campaign := range campaigns {
-
-		if len(campaign.CampaignImages) > 0 {
-			fmt.Println(campaign.CampaignImages[0].FileName)
-		}
-	}
-
-	fmt.Println(campaigns[0].CampaignImages, err)
+	campaignService := campaign.NewService(campaignRepository)
+	campaignHandler := handler.NewCampaignHandler(campaignService)
 
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
@@ -52,6 +41,8 @@ func main() {
 	api.POST("/sessions", userHandler.Login)
 	api.POST("/email_checkers", userHandler.CheckEmailAvailability)
 	api.POST("/avatars", authMiddleware(authService, userService), userHandler.UploadAvatar)
+
+	api.GET("/campaigns", campaignHandler.GetCampaigns)
 
 	router.Run(":3000")
 }
@@ -105,6 +96,21 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 }
 
 /**
+
+
+	campaigns, err := campaignRepository.FindAll()
+	fmt.Println(campaigns, err)
+
+	campaigns, err = campaignRepository.FindByUserID(1)
+	for _, campaign := range campaigns {
+
+		if len(campaign.CampaignImages) > 0 {
+			fmt.Println(campaign.CampaignImages[0].FileName)
+		}
+	}
+
+	fmt.Println(campaigns[0].CampaignImages, err)
+
 single test direct to service, repo
 */
 // authService := auth.NewService()
